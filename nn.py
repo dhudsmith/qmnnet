@@ -28,7 +28,7 @@ import lasagne
 
 # ################## Load the potentials and eigenvalues  ##################
 
-def load_dataset(filepath, num_target, test_frac = 0.25, val_frac = 0.25, random_state = np.random.randint(0,1000)):
+def load_dataset(filepath, num_target, test_frac=0.25, val_frac=0.25, random_state=np.random.randint(0, 1000)):
 
     # Read in the file at `filepath'
     data = np.load(filepath)
@@ -44,8 +44,8 @@ def load_dataset(filepath, num_target, test_frac = 0.25, val_frac = 0.25, random
 
     X_test, X_val, y_test, y_val = train_test_split(
         X_testval, y_testval,
-        test_size= test_frac / (test_frac + val_frac),
-        random_state= random_state
+        test_size=test_frac / (test_frac + val_frac),
+        random_state=random_state
     )
 
     # We just return all the arrays in order, as expected in main().
@@ -57,7 +57,7 @@ def load_dataset(filepath, num_target, test_frac = 0.25, val_frac = 0.25, random
 
 def build_mlp(input_shape, num_outputs, hidden_layer_sizes, drop_input=.2,
               drop_hidden=.5,
-              input_var = None):
+              input_var=None):
     # Note that to make the code easier,
     # all the layers are just called `network` -- there is no need to give them
     # different names if all we return is the last one we created anyway; we
@@ -82,7 +82,6 @@ def build_mlp(input_shape, num_outputs, hidden_layer_sizes, drop_input=.2,
                                         num_units=num_outputs,
                                         nonlinearity=None)
     return network
-
 
 
 # ############################# Batch iterator ###############################
@@ -129,11 +128,10 @@ def main(filepath, num_target, hidden_layer_sizes, num_epochs=500):
     # Create neural network model (depending on first command line parameter)
     print("Building model and compiling functions...")
 
-    network = build_mlp(input_shape = (None, X_train.shape[1]),
-                        num_outputs = y_train.shape[1],
-                        hidden_layer_sizes = hidden_layer_sizes,
-                        input_var = input_var)
-
+    network = build_mlp(input_shape=(None, X_train.shape[1]),
+                        num_outputs=y_train.shape[1],
+                        hidden_layer_sizes=hidden_layer_sizes,
+                        input_var=input_var)
 
     # Create a loss expression for training.
     # We use MSE for this regression problem.
@@ -168,8 +166,9 @@ def main(filepath, num_target, hidden_layer_sizes, num_epochs=500):
     val_fn = theano.function([input_var, target_var], [test_loss, test_acc])
 
     # Create an expression to output the error per eigenvalue
-    test_err_list = lasagne.objectives.squared_error(test_prediction, target_var)
-    test_err_list = test_err_list.mean(axis = 0)
+    test_err_list = lasagne.objectives.squared_error(
+        test_prediction, target_var)
+    test_err_list = test_err_list.mean(axis=0)
     eig_err_fn = theano.function([input_var, target_var], test_err_list)
 
     # Finally, launch the training loop.
@@ -225,7 +224,7 @@ def main(filepath, num_target, hidden_layer_sizes, num_epochs=500):
     print("  test err. per eig.:\n", test_eigs_err / test_batches)
 
     # Optionally, you could now dump the network weights to a file like this:
-    # np.savez('model.npz', *lasagne.layers.get_all_param_values(network))
+    np.savez('Data/model.npz', *lasagne.layers.get_all_param_values(network))
     #
     # And load them again later on like this:
     # with np.load('model.npz') as f:
@@ -251,10 +250,9 @@ if __name__ == '__main__':
     #     if len(sys.argv) > 2:
     #         kwargs['num_epochs'] = int(sys.argv[2])
     #     main(**kwargs)
-    filepath = 'Data/potentialGrid_100000_NB10_lam0.75_V2010.npy'
+    filepath = 'Data/datagrid_NV1000000_NB10_lam0.75_V2010.npy'
     num_target = 10
     hidden_layer_sizes = (200,)
     num_epochs = 50
 
     main(filepath, num_target, hidden_layer_sizes, num_epochs)
-
