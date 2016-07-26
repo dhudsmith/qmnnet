@@ -4,5 +4,6 @@ dependencies:
   - python=3.5
   - numpy
   - matplotlib
+  - scipy
   - pip:
     - git+https://github.com/scikit-learn/scikit-learn.git#egg=scikit-learn
