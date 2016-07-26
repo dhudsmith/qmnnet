@@ -1,11 +1,14 @@
-# QuantumML
+[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org:/repo/dhudsmith/quantumml)
 
-QuantumML uses machine learning to rapidly solve the 1D Schrodinger equation. 
+# qmnnet
+qmnnet uses a neural network to rapidly solve the 1D Schrodinger equation. 
 
-# Project structure
-The project can be broken down into four logical components. Each component is prototyped in a dedicated jupyter notebook containing the documentation, logic, and visualization. These notebooks and their output can be rendered directly in github. To check them out head on over to `/jupyter`. The project components are
+# Structure
+qmnnet involves three basic logical steps:
 
-1. [potentials.ipynb](jupyter/potentials.ipynb): generate an ensemble of quantum mechanical potentials to use as the inputs for training the neural network (NN).
-2. [eigenvalues.ipynb](jupyter/eigenvalues.ipynb): solve Schrodinger's equation for each potential in the ensemble. The NN can be trained to predict either the eigenvalues, the (TODO:) probability distributions, or both.
-3. [learn_sklearn.ipynb](jupyter/learn_sklearn.ipynb): fit a neural network model to the potentials and eigenvalues. This notebook focuses on model selection. (See also [learn_sklearn.ipynb](jupyter/learn_sklearn.ipynb).)
-4. TODO: validation
+1. Generating an ensemble of random poentials
+2. Solving Schrödinger's equation for the eigenvalues and eigenvectors for each potential
+3. Train a neural network to predict the eigenvalues for new potentials
+
+The jupyter notebook `qmnnet.ipynb' goes through these steps. Click the Binder badge to run the jupyter notebook in your browser.
+
