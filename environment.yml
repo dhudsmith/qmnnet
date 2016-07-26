@@ -1,0 +1,12 @@
+name: qmnnet_environment
+
+dependencies:
+  - python=3.5
+  - numpy
+  - matplotlib
+  - time
+  - sys
+  - gc
+  - sklearn=0.18.dev0
+  - pip:
+    - git+https://github.com/blaze/dask.git#egg=dask[complete]
