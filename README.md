@@ -1,4 +1,4 @@
-[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org:/repo/dhudsmith/quantumml)
+[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org:/repo/dhudsmith/qmnnet)
 
 # qmnnet
 qmnnet uses a neural network to rapidly solve the 1D Schrodinger equation. 
