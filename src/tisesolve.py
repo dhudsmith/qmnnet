@@ -35,14 +35,17 @@ def Vmn(m, n, x_vec, V_vec):
 
 def H(n_basis, x_vec, V_vec):
     print("Calculating Hamiltonian matrices...")
+    n_matels = n_basis*(n_basis+1)/2
     h = np.zeros((V_vec.shape[0],n_basis, n_basis))
     for m in range(n_basis):
         for n in range(m+1):
             h[:,m,n]=Vmn(m,n,x_vec,V_vec)
 
             # Print a status
-            percent = (n * n_basis + m + 1) / n_basis ** 2 * 100
+            n_sofar=(m+1)*m/2 + n + 1
+            percent = n_sofar / n_matels * 100
             print("\rStatus: %0.2f %% complete" % percent, end='')
+    print()
     return h + np.diag(E0( np.arange(1, n_basis+1) ))
 
 def eigsys(n_basis, x_vec, V_vec):
